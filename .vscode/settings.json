@@ -1,0 +1,35 @@
+{ 
+
+    "java.jdt.ls.java.home": "C:/Program Files/Java/jdk-20", 
+
+    "java.configuration.updateBuildConfiguration": "automatic", 
+
+    // Generacion archivos ANTLR en el paquete Java 
+
+    "antlr4.generation": { 
+
+    "mode": "external", 
+
+    "language": "Java", 
+
+    "listeners": true, 
+
+    "visitors": true, 
+
+    "generateListener": true, 
+
+    "generateVisitor": true 
+
+    }, 
+
+    "antlr4.debug": { 
+
+    "visualParseTreeHorizontal": false, 
+
+    "visualParseTreeClustered": true 
+
+    } 
+
+ 
+
+} 

@@ -1,0 +1,44 @@
+{ 
+
+    // Use IntelliSense to learn about possible attributes. 
+    // Hover to view descriptions of existing attributes. 
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387 
+    "version": "0.2.0", 
+    "configurations": [ 
+
+        { 
+
+            "type": "java", 
+            "name": "App", 
+            "request": "launch", 
+            "mainClass": "primerpractico.App", 
+            "projectName": "primerpractico" 
+
+        }, 
+        { 
+
+            "name": "Debug ANTLR4 grammar", 
+            "type": "antlr-debug", 
+            "request": "launch", 
+            "grammar": "src/main/java/primerpractico/compiladores.g4", 
+            "input": "input/entrada.txt", 
+            "startRule": "programa", 
+            "printParseTree": true, 
+            "visualParseTree": true 
+
+        }, 
+        { 
+            "type": "java", 
+            "name": "Launch Current File", 
+            "request": "launch", 
+            "mainClass": "$src/main/java/primerpractico/App.java" 
+        }, 
+        { 
+            "type": "java", 
+            "name": "Launch App", 
+            "request": "launch", 
+            "mainClass": "src/main/java/primerpractico/App.java", 
+            "projectName": "primerpractico" 
+        } 
+    ] 
+} 

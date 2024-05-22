@@ -1,0 +1,13 @@
+LLA=1
+LLC=2
+PYC=3
+INT=4
+IGUAL=5
+NUMERO=6
+OTRO=7
+ID=8
+'{'=1
+'}'=2
+';'=3
+'int'=4
+'='=5
