@@ -1,6 +1,6 @@
 // Generated from c:/Users/Fede/Desktop/practicoTc/primerpractico/src/main/java/primerpractico/compiladores.g4 by ANTLR 4.13.1
 
-package primerpractico;
+package primerproyecto;
 
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -55,13 +55,13 @@ public class compiladoresBaseListener implements compiladoresListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTipoFuncion(compiladoresParser.TipoFuncionContext ctx) { }
+	@Override public void enterDeclaracionFunc(compiladoresParser.DeclaracionFuncContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTipoFuncion(compiladoresParser.TipoFuncionContext ctx) { }
+	@Override public void exitDeclaracionFunc(compiladoresParser.DeclaracionFuncContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -79,13 +79,13 @@ public class compiladoresBaseListener implements compiladoresListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTipoparametros(compiladoresParser.TipoparametrosContext ctx) { }
+	@Override public void enterParametros(compiladoresParser.ParametrosContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTipoparametros(compiladoresParser.TipoparametrosContext ctx) { }
+	@Override public void exitParametros(compiladoresParser.ParametrosContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -139,18 +139,6 @@ public class compiladoresBaseListener implements compiladoresListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLlamadaFuncion(compiladoresParser.LlamadaFuncionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitLlamadaFuncion(compiladoresParser.LlamadaFuncionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterExp(compiladoresParser.ExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -170,6 +158,30 @@ public class compiladoresBaseListener implements compiladoresListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitTerm(compiladoresParser.TermContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBooleanos(compiladoresParser.BooleanosContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBooleanos(compiladoresParser.BooleanosContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLogicos(compiladoresParser.LogicosContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLogicos(compiladoresParser.LogicosContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -230,6 +242,18 @@ public class compiladoresBaseListener implements compiladoresListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCond(compiladoresParser.CondContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLlamadaFuncion(compiladoresParser.LlamadaFuncionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLlamadaFuncion(compiladoresParser.LlamadaFuncionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

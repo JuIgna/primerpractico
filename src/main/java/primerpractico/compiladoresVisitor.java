@@ -1,6 +1,6 @@
 // Generated from c:/Users/Fede/Desktop/practicoTc/primerpractico/src/main/java/primerpractico/compiladores.g4 by ANTLR 4.13.1
 
-package primerpractico;
+package primerproyecto;
 
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -31,11 +31,11 @@ public interface compiladoresVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDeclaracionFuncion(compiladoresParser.DeclaracionFuncionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link compiladoresParser#tipoFuncion}.
+	 * Visit a parse tree produced by {@link compiladoresParser#declaracionFunc}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTipoFuncion(compiladoresParser.TipoFuncionContext ctx);
+	T visitDeclaracionFunc(compiladoresParser.DeclaracionFuncContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link compiladoresParser#listaParametros}.
 	 * @param ctx the parse tree
@@ -43,11 +43,11 @@ public interface compiladoresVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitListaParametros(compiladoresParser.ListaParametrosContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link compiladoresParser#tipoparametros}.
+	 * Visit a parse tree produced by {@link compiladoresParser#parametros}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTipoparametros(compiladoresParser.TipoparametrosContext ctx);
+	T visitParametros(compiladoresParser.ParametrosContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link compiladoresParser#declaraciones}.
 	 * @param ctx the parse tree
@@ -73,12 +73,6 @@ public interface compiladoresVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExpresiones(compiladoresParser.ExpresionesContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link compiladoresParser#llamadaFuncion}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitLlamadaFuncion(compiladoresParser.LlamadaFuncionContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link compiladoresParser#exp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -90,6 +84,18 @@ public interface compiladoresVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitTerm(compiladoresParser.TermContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link compiladoresParser#booleanos}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBooleanos(compiladoresParser.BooleanosContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link compiladoresParser#logicos}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLogicos(compiladoresParser.LogicosContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link compiladoresParser#t}.
 	 * @param ctx the parse tree
@@ -120,6 +126,12 @@ public interface compiladoresVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitCond(compiladoresParser.CondContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link compiladoresParser#llamadaFuncion}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLlamadaFuncion(compiladoresParser.LlamadaFuncionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link compiladoresParser#returnCond}.
 	 * @param ctx the parse tree

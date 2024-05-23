@@ -1,7 +1,7 @@
 grammar compiladores;
 
 @header {
-package primerpractico;
+package primerproyecto;
 }
 
 fragment DIGITO: [0-9];
@@ -36,6 +36,12 @@ COMP: '==' | '!=' | '<' | '>' | '<=' | '>=';
 ID: (CARACTER | '_') (CARACTER | DIGITO | '_')*;
 PUNTO: '.';
 
+AND: '&&';
+OR: '||';
+
+TRUE: 'true';
+FALSE: 'false';
+
 WS: [ \t\r\n]+ -> skip;
 
 programa: instrucciones EOF;
@@ -48,16 +54,16 @@ instrucciones:
 	| declaracionFuncion instrucciones;
 
 declaracionFuncion:
-	tipoFuncion ID PA PC (PYC |)
-	| tipoFuncion ID PA listaParametros PC (PYC |);
+	declaracionFunc ID PA PC (PYC |)
+	| declaracionFunc ID PA listaParametros PC (PYC |);
 
-tipoFuncion: VOID | tipoparametros;
+declaracionFunc: VOID | parametros;
 
 listaParametros:
-	tipoparametros ID
-	| tipoparametros ID COMA listaParametros;
+	parametros ID
+	| parametros ID COMA listaParametros;
 
-tipoparametros: INT | DOUBLE | BOOL;
+parametros: INT | DOUBLE | BOOL;
 
 declaraciones:
 	declaracion declaraciones
@@ -66,19 +72,19 @@ declaraciones:
 	| returnCond declaraciones
 	|;
 
-declaracion:
-	tipoparametros ID PYC
-	| tipoparametros ID expresiones;
+declaracion: parametros ID PYC | parametros ID exp PYC;
 
 asignacion: ID expresiones;
 
 expresiones: exp (llamadaFuncion | PYC) expresiones | EOF |;
 
-llamadaFuncion: PA exp PC;
-
 exp: term;
 
 term: factor t;
+
+booleanos: TRUE | FALSE;
+
+logicos: AND | OR;
 
 t:
 	SUMA term
@@ -88,13 +94,14 @@ t:
 	| DIV term
 	| PUNTO term
 	| COMA term
+	| logicos
 	|;
 
-factor: NUMERO | ID | IGUAL exp |;
+factor: NUMERO | ID | IGUAL exp | booleanos |;
 
 condiciones:
 	condicionesDeclaraciones (
-		PA cond PC LLA asignacion LLC
+		PA cond PC LLA asignacion (cond |) LLC
 		| LLA asignacion LLC
 	);
 
@@ -102,8 +109,10 @@ condicionesDeclaraciones: IF | FOR | WHILE | ELSE;
 
 cond:
 	ID exp cond
-	| tipoparametros ID exp PYC cond
+	| parametros ID exp PYC cond
 	| ID exp PYC cond
 	|;
+
+llamadaFuncion: PA exp PC;
 
 returnCond: RETURN expresiones;
