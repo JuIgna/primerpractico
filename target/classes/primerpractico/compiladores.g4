@@ -1,49 +1,109 @@
-grammar compiladores; 
+grammar compiladores;
 
-  
+@header {
+package primerpractico;
+}
 
-@header { 
+fragment DIGITO: [0-9];
+fragment CARACTER: [a-zA-Z];
 
-package primerpractico; 
+NUMERO: DIGITO+;
 
-} 
+INT: 'int';
+DOUBLE: 'double';
+VOID: 'void';
+IF: 'if';
+ELSE: 'else';
+FOR: 'for';
+WHILE: 'while';
+RETURN: 'return';
+BOOL: 'bool';
 
-fragment LETRA : [A-Za-z] ; 
-fragment DIGITO : [0-9] ; 
+// Operators
+PYC: ';';
+COMA: ',';
+IGUAL: '=';
+SUMA: '+';
+RESTA: '-';
+MULT: '*';
+DIV: '/';
+MOD: '%';
+PA: '(';
+PC: ')';
+LLA: '{';
+LLC: '}';
+COMP: '==' | '!=' | '<' | '>' | '<=' | '>=';
+ID: (CARACTER | '_') (CARACTER | DIGITO | '_')*;
+PUNTO: '.';
 
+WS: [ \t\r\n]+ -> skip;
 
-LLA: '{'; 
-LLC: '}'; 
-PYC: ';'; 
-INT: 'int'; 
-IGUAL: '='; 
+programa: instrucciones EOF;
 
-  
-NUMERO : DIGITO+ ; 
+instrucciones:
+	declaracionFuncion LLA declaraciones LLC (
+		instrucciones
+		| EOF
+	)
+	| declaracionFuncion instrucciones;
 
-OTRO : . ; 
+declaracionFuncion:
+	tipoFuncion ID PA PC (PYC |)
+	| tipoFuncion ID PA listaParametros PC (PYC |);
 
-  
-ID : (LETRA | '_')(LETRA | DIGITO | '_')* ; 
+tipoFuncion: VOID | tipoparametros;
 
-  
+listaParametros:
+	tipoparametros ID
+	| tipoparametros ID COMA listaParametros;
 
-programa : instrucciones EOF;  
+tipoparametros: INT | DOUBLE | BOOL;
 
-  
+declaraciones:
+	declaracion declaraciones
+	| asignacion declaraciones
+	| condiciones declaraciones
+	| returnCond declaraciones
+	|;
 
-instrucciones: instruccion instrucciones 
-            | 
-            ; 
+declaracion:
+	tipoparametros ID PYC
+	| tipoparametros ID expresiones;
 
+asignacion: ID expresiones;
 
-instruccion: LLA instrucciones LLC 
-          |declaracion             
-          ; 
+expresiones: exp (llamadaFuncion | PYC) expresiones | EOF |;
 
-  
+llamadaFuncion: PA exp PC;
 
-declaracion:  INT ID PYC; 
+exp: term;
 
+term: factor t;
 
-asignacion: ID IGUAL NUMERO PYC;
+t:
+	SUMA term
+	| RESTA term
+	| COMP term
+	| MULT term
+	| DIV term
+	| PUNTO term
+	| COMA term
+	|;
+
+factor: NUMERO | ID | IGUAL exp |;
+
+condiciones:
+	condicionesDeclaraciones (
+		PA cond PC LLA asignacion LLC
+		| LLA asignacion LLC
+	);
+
+condicionesDeclaraciones: IF | FOR | WHILE | ELSE;
+
+cond:
+	ID exp cond
+	| tipoparametros ID exp PYC cond
+	| ID exp PYC cond
+	|;
+
+returnCond: RETURN expresiones;

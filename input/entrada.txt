@@ -1,9 +1,29 @@
-{ 
-    int x; 
+void despedirse();
+int multiplicar(int a, int b);
+void procesarArreglo(int arr, int size);
 
-    { 
-        x=0; 
-    } 
+int main() {
+    int producto;
+    int valores;
+    despedirse();
+    producto = multiplicar(6, 7);
+    procesarArreglo(valores, 3);
 
-    {int y; y=x+5} 
-} 
+    return 0;
+}
+
+void despedirse() {
+    printf();
+}
+
+int multiplicar(int a, int b) {
+    return a * b;
+}
+
+void procesarArreglo(int arr, int size) {
+    for (int i = 0; i < size; i++) {
+        arr = arr * 2;
+        printf(arr);
+    }
+    printf();
+}
