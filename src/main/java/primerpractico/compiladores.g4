@@ -8,6 +8,7 @@ fragment DIGITO: [0-9];
 fragment CARACTER: [a-zA-Z];
 
 NUMERO: DIGITO+;
+
 DOUBLE_LITERAL: DIGITO+ '.' DIGITO* | DIGITO* '.' DIGITO+;
 
 INT: 'int';
