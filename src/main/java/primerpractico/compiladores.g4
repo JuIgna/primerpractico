@@ -98,7 +98,8 @@ expresion:
 	| STRING
 	| llamadaPrints
 	| llamadaFuncion
-	| incrementoDecremento;
+	| incrementoDecremento
+	| RESTA? numeros;
 
 op_aritmeticos: SUMA | RESTA | MULT | DIV | MOD;
 
