@@ -1,13 +1,14 @@
 grammar compiladores;
 
 @header {
-package primerproyecto;
+package primerpractico;
 }
 
 fragment DIGITO: [0-9];
 fragment CARACTER: [a-zA-Z];
 
 NUMERO: DIGITO+;
+DOUBLE_LITERAL: DIGITO+ '.' DIGITO* | DIGITO* '.' DIGITO+;
 
 INT: 'int';
 DOUBLE: 'double';
@@ -18,8 +19,10 @@ FOR: 'for';
 WHILE: 'while';
 RETURN: 'return';
 BOOL: 'bool';
+TRUE: 'true';
+FALSE: 'false';
+PRINTF: 'printf';
 
-// Operators
 PYC: ';';
 COMA: ',';
 IGUAL: '=';
@@ -35,84 +38,81 @@ LLC: '}';
 COMP: '==' | '!=' | '<' | '>' | '<=' | '>=';
 ID: (CARACTER | '_') (CARACTER | DIGITO | '_')*;
 PUNTO: '.';
+STRING: '"' ( ~["\\] | '\\' .)* '"';
 
 AND: '&&';
 OR: '||';
-
-TRUE: 'true';
-FALSE: 'false';
+INCREMENTO: SUMA SUMA;
+DECREMENTO: RESTA RESTA;
 
 WS: [ \t\r\n]+ -> skip;
 
-programa: instrucciones EOF;
+programa: (instruccion)* EOF;
 
-instrucciones:
-	declaracionFuncion LLA declaraciones LLC (
-		instrucciones
-		| EOF
-	)
-	| declaracionFuncion instrucciones;
+instruccion:
+	declaracionFuncion
+	| bloque
+	| declaracion
+	| asignacion
+	| estructuraControl
+	| llamadaFuncion PYC
+	| expresion PYC
+	| RETURN expresion? PYC;
 
-declaracionFuncion:
-	declaracionFunc ID PA PC (PYC |)
-	| declaracionFunc ID PA listaParametros PC (PYC |);
+bloque: LLA (instruccion)* LLC;
 
-declaracionFunc: VOID | parametros;
+declaracionFuncion: tipo ID PA parametros? PC (bloque | PYC);
 
-listaParametros:
-	parametros ID
-	| parametros ID COMA listaParametros;
+parametros: parametro (COMA parametro)*;
 
-parametros: INT | DOUBLE | BOOL;
+parametro: tipo ID;
 
-declaraciones:
-	declaracion declaraciones
-	| asignacion declaraciones
-	| condiciones declaraciones
-	| returnCond declaraciones
-	|;
+tipo: INT | DOUBLE | BOOL | VOID;
 
-declaracion: parametros ID PYC | parametros ID exp PYC;
+declaracion: tipo ID (IGUAL expresion)? PYC;
 
-asignacion: ID expresiones;
+asignacion: ID IGUAL expresion PYC;
 
-expresiones: exp (llamadaFuncion | PYC) expresiones | EOF |;
+estructuraControl: ifElse | whileLoop | forLoop;
 
-exp: term;
+ifElse: IF PA expresion PC bloque (elseIf)* (ELSE bloque)?;
 
-term: factor t;
+elseIf: ELSE IF PA expresion PC bloque;
 
-booleanos: TRUE | FALSE;
+whileLoop: WHILE PA expresion PC bloque;
 
-logicos: AND | OR;
+forLoop:
+	FOR PA (declaracion | asignacion)? (PYC)? expresion? (PYC)? (
+		asignacion
+		| incrementoDecremento
+	) PC bloque;
 
-t:
-	SUMA term
-	| RESTA term
-	| COMP term
-	| MULT term
-	| DIV term
-	| PUNTO term
-	| COMA term
-	| logicos
-	|;
+expresion:
+	expresion op_aritmeticos expresion
+	| expresion COMP expresion
+	| expresion op_logicas expresion
+	| PA expresion PC
+	| booleano
+	| numeros
+	| ID
+	| STRING
+	| llamadaPrints
+	| llamadaFuncion
+	| incrementoDecremento;
 
-factor: NUMERO | ID | IGUAL exp | booleanos |;
+op_aritmeticos: SUMA | RESTA | MULT | DIV | MOD;
 
-condiciones:
-	condicionesDeclaraciones (
-		PA cond PC LLA asignacion (cond |) LLC
-		| LLA asignacion LLC
-	);
+numeros: NUMERO | DOUBLE_LITERAL;
 
-condicionesDeclaraciones: IF | FOR | WHILE | ELSE;
+op_logicas: AND | OR;
 
-cond:
-	ID exp cond
-	| parametros ID exp PYC cond
-	| ID exp PYC cond
-	|;
+llamadaFuncion: ID PA (expresion (COMA expresion)*)? PC;
 
-llamadaFuncion: PA exp PC;
+llamadaPrints:
+	PRINTF PA ((STRING (COMA expresion)* | expresion))? PC;
 
-returnCond: RETURN expresiones;
+argumentos: expresion (COMA expresion)*;
+
+booleano: TRUE | FALSE;
+
+incrementoDecremento: ID (INCREMENTO | DECREMENTO);
