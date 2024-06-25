@@ -1,14 +1,12 @@
 grammar compiladores;
-
-@header {
-package primerpractico;
-}
+/*
+ @header { package primerpractico; }
+ */
 
 fragment DIGITO: [0-9];
 fragment CARACTER: [a-zA-Z];
 
 NUMERO: DIGITO+;
-
 DOUBLE_LITERAL: DIGITO+ '.' DIGITO* | DIGITO* '.' DIGITO+;
 
 INT: 'int';
@@ -40,7 +38,6 @@ COMP: '==' | '!=' | '<' | '>' | '<=' | '>=';
 ID: (CARACTER | '_') (CARACTER | DIGITO | '_')*;
 PUNTO: '.';
 STRING: '"' ( ~["\\] | '\\' .)* '"';
-
 AND: '&&';
 OR: '||';
 INCREMENTO: SUMA SUMA;
@@ -94,17 +91,17 @@ expresion:
 	| expresion op_logicas expresion
 	| PA expresion PC
 	| booleano
-	| numeros
+	| literal
 	| ID
 	| STRING
 	| llamadaPrints
 	| llamadaFuncion
 	| incrementoDecremento
-	| RESTA? numeros;
+	| RESTA? literal;
 
 op_aritmeticos: SUMA | RESTA | MULT | DIV | MOD;
 
-numeros: NUMERO | DOUBLE_LITERAL;
+literal: NUMERO | DOUBLE_LITERAL;
 
 op_logicas: AND | OR;
 

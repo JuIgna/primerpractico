@@ -1,54 +1,69 @@
-double calcularPromedio(int a, int b, int c);
-void verificarCondiciones(int valor);
+double calcularPromedio(int a, int a, int b, int c) {
 
-int x = -5;
-double y = 2.15;
-bool bandera = true;
+    double suma = a + b;
 
-double calcularPromedio(int a, int b, int c) {
-    double suma = a + b + c;
     double promedio = suma / 3.0;
+
+    sad = 2;
+
     return promedio;
+
 }
 
-void verificarCondiciones(int valor) {
-    if (valor < 10) {
-        printf("El valor es menor que 10\n");
-    } else if (valor == 10) {
-        printf("El valor es igual a 10\n");
-    } else {
-        printf("El valor es mayor que 10\n");
-    }
-}
 
-int main() {
-    int x = 5;
+
+
+  
+
+int main() {  
+
+    int x = 5;  
+
     int y = 10;
-    int z = 15;
-    double p = 3.14;
+
+    int y = 102;
+
+    double z;
+
+    double dsa = 30;
+
     double resultado;
 
-    resultado = calcularPromedio(x, y, z);
     printf("El promedio es: %lf\n", resultado);
 
-    verificarCondiciones(x);
-    verificarCondiciones(y);
-    verificarCondiciones(z);
+    res = 2;
 
-    for (double i = 0; i < 5.2; i++) {
-        printf("Iteración: %d\n", i);
+    dsa = 20;
+
+  
+    verificarCondiciones(x);  
+    verificarCondiciones(y);  
+    verificarCondiciones(z);  
+
+
+    if x == 3) {
+        x = true;
+        resultado = x;
     }
 
-    int contador = 5;
-    while (contador > 0 && contador < 23) {
-        printf("Contador: %d\n", contador);
-        contador--;
-    }
+    p = 2;
 
-    bool condicion = true;
-    if (condicion) {
-        printf("x es menor que y y y es menor que z\n");
-    }
+    for (int i = 0; i < 5.2; i++ {
+        printf("Iteración: %d\n", i)
+    } 
 
-    return 0;
-}
+  
+    int contador = 5;  
+    while (contador > 0 && contador < 23) {  
+        printf("Contador: %d\n", contador);  
+        contador--;  
+    }  
+
+  
+
+    bool condicion = (x > y) && (y < z);  
+
+
+  
+    return 0;  
+} 
