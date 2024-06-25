@@ -1,0 +1,43 @@
+@@startuml tablaSimbolos
+
+
+
+enum TipoDato <<enum>> {
+    + INT 
+    + String
+}
+
+class TablaSimbolos {
+    - contextos : List <Contexto>
+    + addContext ()
+    + delContext ()
+    + buscarIdentificador (Identificador) 
+    + buscarIdentificadorLocal (Identificador) 
+    + addIdentificador (identificador)
+}
+class Contexto {
+    - identificadores : Map (String, Identificador)
+}
+
+class Identificador{
+    - nombre : String
+    - tipoDato : TipoDato
+    - inicializada : Boolean
+    - utilizada : Boolean
+}
+
+class Variable {
+}
+
+class Funcion{
+    - argumentos : List<TipoDato>
+}
+
+TablaSimbolos -> Contexto
+Contexto --> Identificador
+
+Identificador -> TipoDato
+Identificador <|-- Variable
+Identificador <|-- Funcion 
+
+@@enduml

@@ -1,0 +1,21 @@
+Error sintáctico: Falta de apertura de paréntesis en línea 44:7 - missing '(' at 'x'
+Error sintáctico: Falta de cierre de paréntesis en línea 51:33 - missing ')' at '{'
+Error sintáctico: Falta de un punto y coma en línea 53:4 - missing ';' at '}'
+Error semántico: Identificador 'a' ya ha sido declarado. En linea: 1
+Error semántico: Identificador 'sad' no ha sido declarado. En linea: 7
+Error semántico: Identificador 'y' ya ha sido declarado. En linea: 24
+Error semántico: Identificador 'z' no ha sido inicializado. En linea: 26
+Error semántico: Identificador 'resultado' no ha sido inicializado. En linea: 30
+Error semántico: Identificador 'resultado' se utiliza sin inicializarse. En linea: 32
+Error semántico: Identificador 'res' no ha sido declarado. En linea: 34
+Error semántico: Identificador 'verificarCondiciones'. La función no está creada. En linea: 39
+Error semántico: Identificador 'verificarCondiciones'. La función no está creada. En linea: 40
+Error semántico: Identificador 'z' se utiliza sin inicializarse. En linea: 41
+Error semántico: Identificador 'verificarCondiciones'. La función no está creada. En linea: 41
+Error semántico: Identificador 'p' no ha sido declarado. En linea: 49
+Error semántico: Identificador 'z' se utiliza sin inicializarse. En linea: 64
+Error semántico: Identificador main de tipo INT ha sido declarado pero no utilizado.
+Error semántico: Identificador condicion de tipo BOOL ha sido declarado pero no utilizado.
+Error semántico: Identificador c de tipo INT ha sido declarado pero no utilizado.
+Error semántico: Identificador dsa de tipo DOUBLE ha sido declarado pero no utilizado.
+Error semántico: Identificador calcularPromedio de tipo DOUBLE ha sido declarado pero no utilizado.

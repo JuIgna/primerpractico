@@ -1,0 +1,69 @@
+double calcularPromedio(int a, int a, int b, int c) {
+
+    double suma = a + b;
+
+    double promedio = suma / 3.0;
+
+    sad = 2;
+
+    return promedio;
+
+}
+
+
+
+
+  
+
+int main() {  
+
+    int x = 5;  
+
+    int y = 10;
+
+    int y = 102;
+
+    double z;
+
+    double dsa = 30;
+
+    double resultado;
+
+    printf("El promedio es: %lf\n", resultado);
+
+    res = 2;
+
+    dsa = 20;
+
+  
+    verificarCondiciones(x);  
+    verificarCondiciones(y);  
+    verificarCondiciones(z);  
+
+
+    if x == 3) {
+        x = true;
+        resultado = x;
+    }
+
+    p = 2;
+
+    for (int i = 0; i < 5.2; i++ {
+        printf("Iteración: %d\n", i)
+    } 
+
+  
+    int contador = 5;  
+    while (contador > 0 && contador < 23) {  
+        printf("Contador: %d\n", contador);  
+        contador--;  
+    }  
+
+  
+
+    bool condicion = (x > y) && (y < z);  
+
+
+  
+    return 0;  
+} 
