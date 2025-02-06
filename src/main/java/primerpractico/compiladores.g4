@@ -45,7 +45,9 @@ DECREMENTO: RESTA RESTA;
 
 WS: [ \t\r\n]+ -> skip;
 
-programa: (instruccion)* EOF;
+programa: (cuerpoFuncion | instruccion)* EOF;
+
+instrucciones: (instruccion)*;
 
 instruccion:
 	declaracionFuncion
@@ -55,11 +57,18 @@ instruccion:
 	| estructuraControl
 	| llamadaFuncion PYC
 	| expresion PYC
-	| RETURN expresion? PYC;
+	| return
+	;
 
-bloque: LLA (instruccion)* LLC;
+bloque: LLA instrucciones? LLC;
 
-declaracionFuncion: tipo ID PA parametros? PC (bloque | PYC);
+error: ~LLC+;
+
+declaracionFuncion: tipo ID PA parametros? PC PYC;
+
+llamadaFuncion: ID PA (expresion (COMA expresion)*)? PC;
+
+cuerpoFuncion: tipo ID PA parametros? PC bloque;
 
 parametros: parametro (COMA parametro)*;
 
@@ -73,39 +82,72 @@ asignacion: ID IGUAL expresion PYC;
 
 estructuraControl: ifElse | whileLoop | forLoop;
 
-ifElse: IF PA expresion PC bloque (elseIf)* (ELSE bloque)?;
-
-elseIf: ELSE IF PA expresion PC bloque;
+ifElse: IF PA expresion PC bloque (ELSE bloque)?;
 
 whileLoop: WHILE PA expresion PC bloque;
 
 forLoop:
-	FOR PA (declaracion | asignacion)? (PYC)? expresion? (PYC)? (
-		asignacion
-		| incrementoDecremento
-	) PC bloque;
+    FOR PA inicializacion PYC? condicion? PYC actualizacion? PC bloque;
+
+inicializacion:
+    declaracion
+    | asignacion
+    |
+    ;
+
+condicion:
+    expresion
+    |
+    ;
+
+actualizacion:
+    (asignacion | incrementoDecremento) (COMA (asignacion | incrementoDecremento))*;
+
+
+/*forLoop:
+    FOR PA (declaracion | asignacion)? (PYC)? expresion? (PYC)?
+    (asignacion | incrementoDecremento)? PC bloque;*/
+
+
 
 expresion:
-	expresion op_aritmeticos expresion
-	| expresion COMP expresion
-	| expresion op_logicas expresion
-	| PA expresion PC
-	| booleano
-	| literal
-	| ID
-	| STRING
-	| llamadaPrints
-	| llamadaFuncion
-	| incrementoDecremento
-	| RESTA? literal;
+    expresionLogica
+    ;
+
+expresionLogica:
+    expresionComparacion (op_logicas expresionComparacion)*
+    ;
+
+expresionComparacion:
+    expresionAritmetica (COMP expresionAritmetica)?
+    ;
+
+expresionAritmetica:
+    termino ((SUMA | RESTA) termino)*
+    ;
+
+termino:
+    factor ((MULT | DIV | MOD) factor)*
+    ;
+
+factor:
+    PA expresion PC
+    | booleano
+    | ID
+    | STRING
+    | llamadaPrints
+    | llamadaFuncion
+    | incrementoDecremento
+    | RESTA? NUMERO
+    | DOUBLE_LITERAL
+    ;
 
 op_aritmeticos: SUMA | RESTA | MULT | DIV | MOD;
 
-literal: NUMERO | DOUBLE_LITERAL;
-
 op_logicas: AND | OR;
 
-llamadaFuncion: ID PA (expresion (COMA expresion)*)? PC;
+
+
 
 llamadaPrints:
 	PRINTF PA ((STRING (COMA expresion)* | expresion))? PC;
@@ -115,3 +157,6 @@ argumentos: expresion (COMA expresion)*;
 booleano: TRUE | FALSE;
 
 incrementoDecremento: ID (INCREMENTO | DECREMENTO);
+
+return: RETURN expresion? PYC
+        ;

@@ -1,0 +1,29 @@
+int main() {
+    int a = 5;
+    double b = 105;
+    int c;
+
+    c = a + 2;
+
+    if (c > b) {
+        c = c - 1;
+    } else {
+        c = c + 1;
+    }
+
+    for (i = 0 ; i < 10; i = i + 1;) {
+        c = c + i;
+    }
+
+    while (c < 50) {
+        c = c + 2;
+    }
+
+    printResult(c);
+
+    return 1;
+}
+
+void printResult(int result) {
+   result = result * 2;
+}

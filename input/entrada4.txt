@@ -1,0 +1,45 @@
+int global = 0;
+double global2 = 0;
+
+double calcularArea(int base, int altura) {
+    double area = base * altura;
+    return area;
+}
+
+double calcularPerimetro(int lado1, int lado2, int lado3) {
+    double perimetro = lado1 + lado2 + lado3;
+    return perimetro;
+}
+
+int main() {
+    int a = 4;
+    int b = 5;
+    int c = 6;
+    double area;
+    double perimetro;
+    
+    resultArea = calcularArea(a, b);
+    resultPerimetro = calcularPerimetro(a, b, c);
+
+    if (area > 20) {
+        perimetro = perimetro * 2;
+    } else {
+        perimetro = perimetro / 2;
+    }
+
+    for (int i = 0; i < 5; i++) {
+        a = a + 1;
+    }
+
+    int contador = 10;
+    while (contador > 0) {
+        contador--;
+        if (contador % 2 == 0) {
+            a++;
+        } else {
+            b++;
+        }
+    }
+
+    return 0;
+}

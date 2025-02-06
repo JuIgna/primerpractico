@@ -1,0 +1,35 @@
+Tabla de Símbolos:
+------------------
+Contexto: 0
+------------------
+
+Contexto: 1
+------------------
+Nombre: result, Tipo: INT
+Nombre: printResult, Tipo: VOID
+
+Contexto: 2
+------------------
+
+Contexto: 3
+------------------
+Nombre: main, Tipo: INT
+
+Contexto: 4
+------------------
+Nombre: a, Tipo: INT
+Nombre: b, Tipo: DOUBLE
+Nombre: c, Tipo: INT
+
+Contexto: 5
+------------------
+
+Contexto: 6
+------------------
+
+Contexto: 7
+------------------
+
+Contexto: 8
+------------------
+

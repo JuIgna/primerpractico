@@ -79,5 +79,9 @@ public class TablaSimbolos {
         contextos.get(contextos.size() - 1).addIdentificador(identificador);
     }
 
+    public Contexto getContextoActual() {
+        return contextos.get(contextos.size() - 1);
+    }
+
     
 }

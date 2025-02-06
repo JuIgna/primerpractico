@@ -1,0 +1,42 @@
+a = 5;
+b = 105;
+c = 0;
+t0 = a + 2;
+c = t0;
+t1 = c > b;
+if t1 goto L0;
+t2 = c - 1;
+c = t2;
+goto L1;
+L0:
+goto L2
+L1:
+t3 = c + 1;
+c = t3;
+L2:
+i = 0;
+t4 = i < 10;
+t5 = i + 1;
+i = t5;
+L3:
+if t4 goto L4;
+goto L5:
+L4:
+t6 = c + i;
+c = t6;
+goto L3;
+L5:
+t7 = c < 50;
+L6:
+if t7 goto L7;
+goto L8;
+L7:
+t8 = c + 2;
+c = t8;
+goto L6;
+L8:
+call printResult (c);
+t9 = return;
+return 1;
+t10 = result * 2;
+result = t10;

@@ -1,4 +1,4 @@
-// Generated from C:/Users/Fede/Desktop/primerpractico-main/src/main/java/primerpractico/compiladores.g4 by ANTLR 4.13.1
+// Generated from C:/Users/Fede/Desktop/primerpractico-1/src/main/java/primerpractico/compiladores.g4 by ANTLR 4.13.1
 package primerpractico;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
