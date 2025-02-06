@@ -2,24 +2,24 @@ Tabla de Símbolos:
 ------------------
 Contexto: 0
 ------------------
+Nombre: global, Tipo: INT
 
 Contexto: 1
 ------------------
-Nombre: result, Tipo: INT
-Nombre: printResult, Tipo: VOID
-
-Contexto: 2
-------------------
-
-Contexto: 3
-------------------
 Nombre: main, Tipo: INT
 
-Contexto: 4
+Contexto: 2
 ------------------
 Nombre: a, Tipo: INT
 Nombre: b, Tipo: DOUBLE
 Nombre: c, Tipo: INT
+Nombre: i, Tipo: INT
+
+Contexto: 3
+------------------
+
+Contexto: 4
+------------------
 
 Contexto: 5
 ------------------
@@ -29,6 +29,8 @@ Contexto: 6
 
 Contexto: 7
 ------------------
+Nombre: result, Tipo: INT
+Nombre: printResult, Tipo: VOID
 
 Contexto: 8
 ------------------

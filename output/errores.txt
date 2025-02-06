@@ -1,4 +1,1 @@
-Error semántico: Identificador 'c' no ha sido inicializado. En linea: 4
-Error semántico: Identificador 'i' no ha sido declarado. En linea: 14
-Error semántico: Identificador 'i' no ha sido declarado. En linea: 14
-Error semántico: Identificador 'printResult'. La función no está creada. En linea: 22
+Advertencia: Identificador global de tipo INT ha sido declarado pero no utilizado.

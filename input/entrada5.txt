@@ -1,9 +1,17 @@
+int global = 1;
+
+void printResult(int result) {
+   result = result * 2;
+}
+
 int main() {
     int a = 5;
     double b = 105;
-    int c;
+    int c = 0;
 
     c = a + 2;
+
+
 
     if (c > b) {
         c = c - 1;
@@ -11,7 +19,7 @@ int main() {
         c = c + 1;
     }
 
-    for (i = 0 ; i < 10; i = i + 1;) {
+    for (int i = 0 ; i < 10; i = i + 1;) {
         c = c + i;
     }
 
@@ -22,8 +30,4 @@ int main() {
     printResult(c);
 
     return 1;
-}
-
-void printResult(int result) {
-   result = result * 2;
 }

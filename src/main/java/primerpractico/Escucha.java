@@ -101,20 +101,21 @@ public class Escucha extends compiladoresBaseListener {
         String nombre = ctx.ID().getText();
         boolean encontrado = false;
 
-        for (TipoDato tipoDato : TipoDato.values()) {
-            Identificador identificador = new Identificador(nombre, tipoDato);
-            Identificador idEncontrado = tablaSimbolos.buscarIdentificador(identificador);
-            if (idEncontrado != null && idEncontrado.isInicializada()) {
+        for (Contexto contexto : contextoAuxiliar) {
+            Identificador idEncontrado = contexto.buscarIdentificador(new Identificador(nombre, null));
+            if (idEncontrado != null) {
                 encontrado = true;
-                tablaSimbolos.identificadorUtilizado(identificador);
+                tablaSimbolos.identificadorUtilizado(idEncontrado);
                 break;
             }
         }
+
         if (!encontrado) {
             errores++;
-            escritorErrores.println("Error semántico: Identificador '" + nombre + "'. La función no está creada. En linea: " + ctx.ID().getSymbol().getLine());
+            escritorErrores.println("Error semántico: Identificador '" + nombre + "'. La función no está creada. En línea: " + ctx.ID().getSymbol().getLine());
         }
     }
+
 
     @Override
     public void exitDeclaracionFuncion(compiladoresParser.DeclaracionFuncionContext ctx) {
@@ -249,7 +250,7 @@ public class Escucha extends compiladoresBaseListener {
         for (Identificador identificador : identificadores) {
             if (!identificador.isUtilizada()) {
                 warnings++;
-                escritorErrores.println("Error semántico: Identificador " + identificador.getNombre() + " de tipo " + identificador.getTipoDato() + " ha sido declarado pero no utilizado.");
+                escritorErrores.println("Advertencia: Identificador " + identificador.getNombre() + " de tipo " + identificador.getTipoDato() + " ha sido declarado pero no utilizado.");
             }
         }
         Contexto contexto = tablaSimbolos.getContextoActual();

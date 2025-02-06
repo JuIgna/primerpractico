@@ -44,9 +44,6 @@ public class Caminante extends compiladoresBaseVisitor<String> {
         String nombre = ctx.ID().getText();
         String temp = visit(ctx.expresion());
         codigoTresDirecciones.append(nombre).append(" = ").append(temp).append(";");
-        if (!codigoTresDirecciones.toString().trim().endsWith(";")) {
-            System.err.println("Error: Falta punto y coma en la asignación.");
-        }
         codigoTresDirecciones.append("\n");
         return nombre + " = " + temp + ";";
     }
@@ -417,4 +414,30 @@ public class Caminante extends compiladoresBaseVisitor<String> {
 
         return null; // Las funciones void no devuelven valores
     }
+
+    @Override
+    public String visitCuerpoFuncion(compiladoresParser.CuerpoFuncionContext ctx) {
+        // Obtener el nombre de la función (ID) y su tipo
+        String tipo = ctx.tipo().getText().toUpperCase();
+        String id = ctx.ID().getText();
+
+        // Crear la declaración de la función
+        if (tipo.equals("VOID")) {
+            codigoTresDirecciones.append("function ").append(id).append(" (void):\n");
+        } else {
+            codigoTresDirecciones.append("function ").append(id).append(":\n");
+        }
+
+        // Procesar el bloque de la función
+        if (ctx.bloque() != null) {
+            visit(ctx.bloque());
+        }
+
+        // Finalizar la declaración de la función
+        codigoTresDirecciones.append("end function\n");
+
+        return null;
+    }
+
+
 }

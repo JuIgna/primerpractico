@@ -1,42 +1,47 @@
+global = 1;
+function printResult (void):
+t0 = result * 2;
+result = t0;
+end function
+function main:
 a = 5;
 b = 105;
 c = 0;
-t0 = a + 2;
-c = t0;
-t1 = c > b;
-if t1 goto L0;
-t2 = c - 1;
-c = t2;
+t1 = a + 2;
+c = t1;
+t2 = c > b;
+if t2 goto L0;
+t3 = c - 1;
+c = t3;
 goto L1;
 L0:
 goto L2
 L1:
-t3 = c + 1;
-c = t3;
+t4 = c + 1;
+c = t4;
 L2:
 i = 0;
-t4 = i < 10;
-t5 = i + 1;
-i = t5;
+t5 = i < 10;
+t6 = i + 1;
+i = t6;
 L3:
-if t4 goto L4;
+if t5 goto L4;
 goto L5:
 L4:
-t6 = c + i;
-c = t6;
+t7 = c + i;
+c = t7;
 goto L3;
 L5:
-t7 = c < 50;
+t8 = c < 50;
 L6:
-if t7 goto L7;
+if t8 goto L7;
 goto L8;
 L7:
-t8 = c + 2;
-c = t8;
+t9 = c + 2;
+c = t9;
 goto L6;
 L8:
 call printResult (c);
-t9 = return;
+t10 = return;
 return 1;
-t10 = result * 2;
-result = t10;
+end function
