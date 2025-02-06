@@ -48,79 +48,138 @@ public class Caminante extends compiladoresBaseVisitor<String> {
         return nombre + " = " + temp + ";";
     }
 
+    // Declaración de un mapa para almacenar las expresiones ya evaluadas y su resultado.
     Map<String, String> cacheExpresiones = new HashMap<>();
 
+    // Método que visita una expresión general.
     @Override
     public String visitExpresion(compiladoresParser.ExpresionContext ctx) {
+        // Obtenemos el texto de la expresión
         String expresionTexto = ctx.getText();
+
+        // Si la expresión ya fue evaluada previamente, retornamos el valor almacenado en el cache.
         if (cacheExpresiones.containsKey(expresionTexto)) {
             return cacheExpresiones.get(expresionTexto);
         }
+
+        // Si no estaba en el cache, procesamos la expresión lógica asociada.
         String resultado = visit(ctx.expresionLogica());
+
+        // Almacenamos el resultado de la expresión en el cache.
         cacheExpresiones.put(expresionTexto, resultado);
+
         return resultado;
     }
 
+    // Método que visita una expresión lógica.
     @Override
     public String visitExpresionLogica(compiladoresParser.ExpresionLogicaContext ctx) {
+        // Obtenemos el texto de la expresión lógica.
         String expresionTexto = ctx.getText();
+
+        // Si la expresión lógica ya fue evaluada, retornamos el resultado del cache.
         if (cacheExpresiones.containsKey(expresionTexto)) {
             return cacheExpresiones.get(expresionTexto);
         }
 
+        // Evaluamos la primera expresión de comparación.
         String temp = visit(ctx.expresionComparacion(0));
 
+        // Iteramos sobre las expresiones de comparación adicionales (si existen).
         for (int i = 1; i < ctx.expresionComparacion().size(); i++) {
-            String temp2 = visit(ctx.expresionComparacion(i));
+            String temp2 = visit(ctx.expresionComparacion(i)); // Evaluamos la siguiente expresión de comparación.
+
+            // Obtenemos el operador lógico (por ejemplo, AND, OR).
             String operador = ctx.op_logicas(i - 1).getText();
+
+            // Generamos una nueva variable temporal para almacenar el resultado de la operación lógica.
             String nuevaTemp = nuevaTemporal();
+
+            // Agregamos el código de tres direcciones (representación intermedia).
             codigoTresDirecciones.append(nuevaTemp).append(" = ").append(temp).append(" ").append(operador).append(" ").append(temp2).append(";\n");
+
+            // Actualizamos el valor de temp para las siguientes iteraciones.
             temp = nuevaTemp;
         }
 
+        // Almacenamos el resultado de la expresión lógica en el cache.
         cacheExpresiones.put(expresionTexto, temp);
+
         return temp;
     }
 
+    // Método que visita una expresión de comparación.
     @Override
     public String visitExpresionComparacion(compiladoresParser.ExpresionComparacionContext ctx) {
+        // Evaluamos la primera expresión aritmética.
         String temp = visit(ctx.expresionAritmetica(0));
 
+        // Si existe un operador de comparación (como ==, !=, <, >), evaluamos la siguiente expresión.
         if (ctx.COMP() != null) {
-            String temp2 = visit(ctx.expresionAritmetica(1));
+            String temp2 = visit(ctx.expresionAritmetica(1)); // Evaluamos la segunda expresión aritmética.
+
+            // Obtenemos el operador de comparación.
             String operador = ctx.COMP().getText();
+
+            // Generamos una nueva variable temporal para almacenar el resultado de la comparación.
             String nuevaTemp = nuevaTemporal();
+
+            // Agregamos el código de tres direcciones correspondiente.
             codigoTresDirecciones.append(nuevaTemp).append(" = ").append(temp).append(" ").append(operador).append(" ").append(temp2).append(";\n");
+
+            // Actualizamos el valor de temp con el resultado de la comparación.
             temp = nuevaTemp;
         }
 
         return temp;
     }
 
+    // Método que visita una expresión aritmética.
     @Override
     public String visitExpresionAritmetica(compiladoresParser.ExpresionAritmeticaContext ctx) {
+        // Evaluamos el primer término de la expresión aritmética.
         String temp = visit(ctx.termino(0));
 
+        // Iteramos sobre los términos restantes, si los hay.
         for (int i = 1; i < ctx.termino().size(); i++) {
-            String temp2 = visit(ctx.termino(i));
-            String operador = ctx.getChild(2 * i - 1).getText(); // SUMA o RESTA
+            String temp2 = visit(ctx.termino(i)); // Evaluamos el siguiente término.
+
+            // Obtenemos el operador (Suma o Resta).
+            String operador = ctx.getChild(2 * i - 1).getText();
+
+            // Generamos una nueva variable temporal para almacenar el resultado de la operación aritmética.
             String nuevaTemp = nuevaTemporal();
+
+            // Agregamos el código de tres direcciones correspondiente.
             codigoTresDirecciones.append(nuevaTemp).append(" = ").append(temp).append(" ").append(operador).append(" ").append(temp2).append(";\n");
+
+            // Actualizamos el valor de temp para las siguientes iteraciones.
             temp = nuevaTemp;
         }
 
         return temp;
     }
 
+    // Método que visita un término en la expresión aritmética (multiplicación, división o módulo).
     @Override
     public String visitTermino(compiladoresParser.TerminoContext ctx) {
+        // Evaluamos el primer factor.
         String temp = visit(ctx.factor(0));
 
+        // Iteramos sobre los factores restantes.
         for (int i = 1; i < ctx.factor().size(); i++) {
-            String temp2 = visit(ctx.factor(i));
-            String operador = ctx.getChild(2 * i - 1).getText(); // MULT, DIV o MOD
+            String temp2 = visit(ctx.factor(i)); // Evaluamos el siguiente factor.
+
+            // Obtenemos el operador (Multiplicación, División o Módulo).
+            String operador = ctx.getChild(2 * i - 1).getText();
+
+            // Generamos una nueva variable temporal para almacenar el resultado de la operación.
             String nuevaTemp = nuevaTemporal();
+
+            // Agregamos el código de tres direcciones correspondiente.
             codigoTresDirecciones.append(nuevaTemp).append(" = ").append(temp).append(" ").append(operador).append(" ").append(temp2).append(";\n");
+
+            // Actualizamos el valor de temp para las siguientes iteraciones.
             temp = nuevaTemp;
         }
 
@@ -172,12 +231,6 @@ public class Caminante extends compiladoresBaseVisitor<String> {
         String etiquetaFalso = nuevaEtiqueta();
         String etiquetaFin = nuevaEtiqueta();
 
-
-
-        // 🔹 Obtener el texto del bloque para verificar balanceo
-        String bloqueIf = ctx.bloque(0).getText();
-
-
         // 🔹 Generar código tres direcciones para el IF
         codigoTresDirecciones.append("if ").append(condicion).append(" goto ").append(etiquetaVerdadero).append(";\n");
         visit(ctx.bloque(0));  // Procesar el bloque IF
@@ -221,14 +274,6 @@ public class Caminante extends compiladoresBaseVisitor<String> {
         codigoTresDirecciones.append("goto ").append(etiquetaInicio).append(";\n");
         codigoTresDirecciones.append(etiquetaFin).append(":\n");
 
-        /* anterior codigo
-        codigoTresDirecciones.append(etiquetaInicio).append(":\n");
-        codigoTresDirecciones.append("if ").append(condicion).append(" goto ").append(etiquetaFin).append(";\n");
-        visit(ctx.bloque());
-        codigoTresDirecciones.append("goto ").append(etiquetaInicio).append(";\n");
-        codigoTresDirecciones.append(etiquetaFin).append(":\n");
-         */
-
         return null;
     }
 
@@ -260,16 +305,6 @@ public class Caminante extends compiladoresBaseVisitor<String> {
         visit(ctx.bloque());
         codigoTresDirecciones.append("goto ").append(etiquetaInicio).append(";\n");
         codigoTresDirecciones.append(etiquetaFin).append(":\n");
-
-        /*
-        codigoTresDirecciones.append(inicializacion).append("\n");
-        codigoTresDirecciones.append(etiquetaInicio).append(":\n");
-        codigoTresDirecciones.append("t2 = ").append(condicion).append(";\n"); // Condición del ciclo
-        codigoTresDirecciones.append("if !(t2) goto ").append(etiquetaFin).append(";\n");
-        codigoTresDirecciones.append(visit(ctx.bloque())).append("\n");  // Cuerpo del ciclo
-        codigoTresDirecciones.append(actualizacion).append("\n"); // Actualización (incremento de i)
-        codigoTresDirecciones.append("goto ").append(etiquetaInicio).append(";\n");
-        codigoTresDirecciones.append(etiquetaFin).append(":\n");*/
 
         return null;
     }

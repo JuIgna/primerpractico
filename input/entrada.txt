@@ -1,39 +1,6 @@
-int global = 0;
-
-double verificarCondiciones(int a, int b, int c) {
-    double suma = a + b * c;
-    double promedio = suma / 3;
-    int sad = 2;
-    return promedio;
-}
-
-int main() {
-    int x = 5;
-    int y = 10;
-    double z;
-    double dsa = 30;
-    double resultado;
-
-    int res = 2;
-    dsa = 20;
-
-    verificarCondiciones(x);
-    verificarCondiciones(y);
-    verificarCondiciones(z);
-
-    if (x == 3) {
-        x = 1;
-        resultado = x;
-    }
-
-    for (int i = 0; i < 10; i = i + 1) {
-        suma = 3;
-    }
-
-    int contador = 5;
-    while (contador > 0 && contador < 23) {
-        contador++;
-    }
-
-    return 0;
-}
+12/02/23 11:45 A1F3D 200
+13/02/23 14:30 D4B2F 350
+14/02/23 12:00 1234AB 150
+15/02/23 16:15 D9F01 400
+16/02/23 11:30 34ABC 500
+17/02/23 17:00 A123D 600
